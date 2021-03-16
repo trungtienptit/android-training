@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Github</string>
+    <string name="btn_retry">Retry</string>
+    <string name="err_msg_get_author">Get author failed, try again!</string>
+    <string name="text_repositories">%d repositories</string>
+    <string name="text_page_header">Page %d</string>
+    <string name="err_msg_unauthorized">Invalid username or password</string>
+    <string name="err_msg_no_internet_connection">Can not connect to server.</string>
+    <string name="err_msg_unexpected_error_occurred">Unexpected error occurred.</string>
+</resources>
