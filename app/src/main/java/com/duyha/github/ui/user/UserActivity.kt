@@ -42,6 +42,7 @@ class UserActivity : BaseActivity<UserViewModel>() {
         binding.swipeRefresh.setColorSchemeResources(R.color.colorAccent)
         binding.swipeRefresh.setOnRefreshListener {
             adapter.refresh()
+            binding.swipeRefresh.isRefreshing = false
         }
     }
 
@@ -56,7 +57,6 @@ class UserActivity : BaseActivity<UserViewModel>() {
         lifecycleScope.launch {
             viewModel.repoFlow.collectLatest { pagingData ->
                 adapter.submitData(pagingData)
-                binding.swipeRefresh.isRefreshing = false
             }
         }
     }
