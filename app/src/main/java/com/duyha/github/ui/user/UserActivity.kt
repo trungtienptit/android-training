@@ -53,11 +53,14 @@ class UserActivity : AppCompatActivity() {
     }
 
     private fun showUser(user: User) {
-        //TODO(Show user info)
-        /*Glide.with(this)
+        Glide.with(this)
             .load(user.avatarUrl)
             .placeholder(R.drawable.avatar_placeholder)
-            .into(binding.avatar)*/
+            .into(binding.avatar)
+        binding.name.text = user.name
+        binding.repoCount.text = getString(R.string.text_repositories, user.publicRepos)
+        binding.blog.text = user.blog
+        binding.email.text = user.email
     }
 
     private fun showRepoList(repoList: List<Repo>) {

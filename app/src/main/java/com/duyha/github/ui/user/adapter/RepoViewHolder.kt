@@ -21,7 +21,13 @@ class RepoViewHolder(parent: ViewGroup)
 
     fun bind(item: Repo?) {
         item?.let { it ->
-            //TODO show repo item here
+            biding.title.text = it.fullName
+            biding.desc.text = it.description
+            biding.updateTime.text = it.updatedAt
+            biding.language.text = it.language
+            biding.watcher.text = it.watchersCount.toString()
+            biding.star.text = it.stargazersCount.toString()
+            biding.fork.text = it.forksCount.toString()
         }
     }
 }
