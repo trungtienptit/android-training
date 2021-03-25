@@ -3,9 +3,11 @@ package com.duyha.github.ui.user.adapter
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.duyha.github.data.remote.model.Repo
 
-class RepoAdapter : PagingDataAdapter<Repo, RepoViewHolder>(RepoComparator) {
+class RepoAdapter(private var dataSet: List<Repo>) : RecyclerView.Adapter<RepoViewHolder>() {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -14,17 +16,14 @@ class RepoAdapter : PagingDataAdapter<Repo, RepoViewHolder>(RepoComparator) {
     }
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
-        val item = getItem(position)
+        val item = dataSet[position]
         holder.bind(item)
     }
-}
 
-object RepoComparator : DiffUtil.ItemCallback<Repo>() {
-    override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean {
-        return oldItem.id == newItem.id
-    }
+    override fun getItemCount(): Int = dataSet.size
 
-    override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean {
-        return oldItem == newItem
+    fun refresh(dataSet: List<Repo>) {
+        this.dataSet = dataSet
+        notifyDataSetChanged()
     }
 }

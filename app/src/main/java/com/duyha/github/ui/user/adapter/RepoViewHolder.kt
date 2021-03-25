@@ -21,22 +21,7 @@ class RepoViewHolder(parent: ViewGroup)
 
     fun bind(item: Repo?) {
         item?.let { it ->
-            biding.root.setOnClickListener {
-                item.htmlUrl.let { url ->
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    biding.root.context.startActivity(intent)
-                }
-            }
-            biding.title.text = it.fullName
-            biding.desc.text = it.description
-            val updateDate = it.updatedAt.toDateTime("yyyy-MM-dd'T'HH:mm:ss")
-            updateDate?.let { date ->
-                biding.updateTime.text = date.formatToString("MMM dd, yyyy")
-            }
-            biding.language.text = it.language
-            biding.watcher.text = it.watchersCount.toString()
-            biding.star.text = it.stargazersCount.toString()
-            biding.fork.text = it.forksCount.toString()
+            //TODO show repo item here
         }
     }
 }

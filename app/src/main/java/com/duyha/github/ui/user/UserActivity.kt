@@ -1,77 +1,68 @@
 package com.duyha.github.ui.user
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.duyha.github.ui.base.BaseActivity
 import com.duyha.github.R
+import com.duyha.github.data.remote.model.Repo
 import com.duyha.github.data.remote.model.User
 import com.duyha.github.databinding.ActivityUserBinding
+import com.duyha.github.ui.user.adapter.DummyData
 import com.duyha.github.ui.user.adapter.LoadStateAdapter
 import com.duyha.github.ui.user.adapter.RepoAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
-class UserActivity : BaseActivity<UserViewModel>() {
+class UserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserBinding
-    private val adapter = RepoAdapter()
+    private val adapter = RepoAdapter(emptyList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUp()
     }
 
-    override fun setUp() {
+    private fun setUp() {
         initRepoRecyclerView()
         initSwipeToRefresh()
+        showDummyData()
     }
 
     private fun initRepoRecyclerView() {
-        binding.repoList.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = LoadStateAdapter(adapter::retry),
-            footer = LoadStateAdapter(adapter::retry)
-        )
+        binding.repoList.adapter = adapter
     }
 
     private fun initSwipeToRefresh() {
         binding.swipeRefresh.setColorSchemeResources(R.color.colorAccent)
         binding.swipeRefresh.setOnRefreshListener {
-            adapter.refresh()
             binding.swipeRefresh.isRefreshing = false
         }
     }
 
-    override fun callViewModel() {
-        viewModel.getUser()
-    }
+    private fun showDummyData() {
+        showUser(DummyData.USER)
+        showRepoList(DummyData.REPO_LIST)
 
-    override fun setObservers() {
-        viewModel.user.observe(this) {
-            showUser(it)
-        }
-        lifecycleScope.launch {
-            viewModel.repoFlow.collectLatest { pagingData ->
-                adapter.submitData(pagingData)
-            }
-        }
     }
 
     private fun showUser(user: User) {
-        Glide.with(this)
+        //TODO(Show user info)
+        /*Glide.with(this)
             .load(user.avatarUrl)
             .placeholder(R.drawable.avatar_placeholder)
-            .into(binding.avatar)
-        binding.name.text = user.name
-        binding.repoCount.text = getString(R.string.text_repositories, user.publicRepos)
-        binding.blog.text = user.blog
-        binding.email.text = user.email
+            .into(binding.avatar)*/
     }
 
-    override fun createViewModel(): UserViewModel =
-        ViewModelProvider(this).get(UserViewModel::class.java)
+    private fun showRepoList(repoList: List<Repo>) {
+        adapter.refresh(repoList)
+    }
+
+
 }
