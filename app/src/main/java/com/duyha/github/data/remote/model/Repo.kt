@@ -2,14 +2,15 @@ package com.duyha.github.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
+//TODO map json to Repo object
 data class Repo(
     @SerializedName("id") val id : Long,
-    @SerializedName("full_name") val fullName : String,
-    @SerializedName("description") val description : String,
-    @SerializedName("language") val language : String,
-    @SerializedName("html_url") val htmlUrl : String,
-    @SerializedName("updated_at") val updatedAt : String,
-    @SerializedName("stargazers_count") val stargazersCount : Int,
-    @SerializedName("watchers_count") val watchersCount : Int,
-    @SerializedName("forks_count") val forksCount : Int
+    val fullName : String,
+    val description : String,
+    val language : String,
+    val htmlUrl : String,
+    val updatedAt : String,
+    val stargazersCount : Int,
+    val watchersCount : Int,
+    val forksCount : Int
 )

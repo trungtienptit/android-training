@@ -2,12 +2,11 @@ package com.duyha.github.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
+//TODO map json to User object
 data class User(
     @SerializedName("avatar_url") val avatarUrl : String,
-    @SerializedName("name") val name : String,
-    @SerializedName("blog") val blog : String,
-    @SerializedName("email") val email : String,
-    @SerializedName("public_repos") val publicRepos : Int
-) {
-    fun mapToDomain() = User(avatarUrl, name, blog, email, publicRepos)
-}
+    val name : String,
+    val blog : String,
+    val email : String,
+    val publicRepos : Int
+)
