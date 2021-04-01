@@ -5,11 +5,6 @@ import com.duyha.github.data.remote.model.User
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+//TODO create API interface
 interface GithubApi {
-    @GET("users/google")
-    suspend fun getUser(): User
-
-    @GET("users/google/repos")
-    suspend fun getReposPage(@Query("per_page") perPage: Int,
-                             @Query("page") page: Int) : List<Repo>
 }

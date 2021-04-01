@@ -35,9 +35,6 @@ class UserViewModel @Inject constructor(
         .cachedIn(viewModelScope)
 
     fun getUser() {
-        viewModelScope.launch(coroutineExceptionHandler + Dispatchers.IO) {
-            val user = userRepository.getUser()
-            _user.postValue(user)
-        }
+        //TODO get user and then post to UI here
     }
 }

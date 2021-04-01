@@ -8,5 +8,6 @@ class UserRepository @Inject constructor(
     private val githubApi: GithubApi
 ) {
 
-    suspend fun getUser(): User = githubApi.getUser()
+    //TODO change this line to get user from githubApi
+    suspend fun getUser(): User = User("", "", "", "", 0)
 }
