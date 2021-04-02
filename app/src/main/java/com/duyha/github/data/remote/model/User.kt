@@ -8,6 +8,4 @@ data class User(
     @SerializedName("blog") val blog : String,
     @SerializedName("email") val email : String,
     @SerializedName("public_repos") val publicRepos : Int
-) {
-    fun mapToDomain() = User(avatarUrl, name, blog, email, publicRepos)
-}
+)
